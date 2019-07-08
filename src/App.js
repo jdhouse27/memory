@@ -1,27 +1,32 @@
 import React, { Component } from "react";
-import AvengerCard from "./components/AvengerCard";
+import Navbar from "./components/Navbar";
 import Wrapper from "./components/Wrapper";
-import Title from "./components/Title";
-import avengers from "./avengers.json";
+import Section from "./components/Section";
+import AvengerCard from "./components/AvengerCard";
+import Avengers from "./avengers.json";
+
 
 class App extends Component {
   // Setting this.state.avengers to the avengers json array
   state = {
-    avengers
+    Avengers,
+    score: 0
   };
 
   // Map over this.state.avengers and render a AvengerCard component for each avenger object
   render() {
     return (
       <Wrapper>
-        <Title>Avengers List</Title>
-        {this.state.avengers.map(avenger => (
-          <AvengerCard
-            id={avenger.id}
-            key={avenger.id}
-            image={avenger.image}
-          />
-        ))}
+      <Navbar score={this.state.score} />
+      <Section>
+          {this.state.Avengers.map(Avenger => (
+            <AvengerCard
+              id={Avenger.id}
+              key={Avenger.id}
+              image={Avenger.image}
+            />
+          ))}
+      </Section>
       </Wrapper>
     );
   }
