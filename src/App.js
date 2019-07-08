@@ -10,17 +10,16 @@ class App extends Component {
   // Setting this.state.avengers to the avengers json array
   state = {
     Avengers,
-    score: 0,
-    clickedAvenger: []
+    clickedAvenger: [],
+    score: 0
   };
 
   handleClick = id => {
     //first we must capture the Avengers event then we can add to the clickAvenger array to compare clicks later
-    const currentAvenger = id;
-    const prevClickedAvenger = this.state.clickedAvenger.indexOf(currentAvenger) > 1;
-    
+    const clickedAvenger = this.state.clickedAvenger.indexOf(id === id) > 1;
+    console.log(clickedAvenger);
     //here we determine what to do if the Avenger has already been clicked
-    if (prevClickedAvenger) {
+    if (clickedAvenger) {
 
       //radomly sort Avengers
       this.setState({
@@ -42,7 +41,6 @@ class App extends Component {
         score: this.state.score + 1
       },
       //what to do when user has clicked all Avengers correctly
-
         () => {
           if (this.state.score === 12) {
           console.log("Winner");
