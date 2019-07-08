@@ -10,29 +10,17 @@ class App extends Component {
   // Setting this.state.avengers to the avengers json array
   state = {
     Avengers,
-    clickedAvenger: [],
-    score: 0
+    score: 0,
+    topscore: 0,
+    clickedAvengers: []
   };
 
-  handleClick = id => {
-    //first we must capture the Avengers event then we can add to the clickAvenger array to compare clicks later
-    const clickedAvenger = this.state.clickedAvenger.indexOf(id === id) > 1;
-    console.log(clickedAvenger);
+  handleClick = (id) => {
+    //first we must capture the Avengers id then we can add to the clickAvenger array to compare clicks later
+    const clickedAvengers = this.state.clickedAvengers;
+   
     //here we determine what to do if the Avenger has already been clicked
-    if (clickedAvenger) {
-
-      //radomly sort Avengers
-      this.setState({
-        Avengers: this.state.Avengers.sort(function(a, b) {
-          return 0.5 - Math.random();
-        }),
-        clickedAvenger: [],
-        score: 0
-      });
-      //add You lose effect
-      console.log("you loser!");
-    } else {
-
+    if (clickedAvengers.indexOf(id)) {
       //radomly sort Avengers
       this.setState({
         Avengers: this.state.Avengers.sort(function(a, b) {
@@ -55,6 +43,17 @@ class App extends Component {
           }
         }
       );
+    } else {
+      //radomly sort Avengers
+      this.setState({
+        Avengers: this.state.Avengers.sort(function(a, b) {
+          return 0.5 - Math.random();
+        }),
+        clickedAvenger: [],
+        score: 0
+      });
+      //add You lose effect
+      console.log("you loser!");
     }
   };
 
@@ -62,7 +61,7 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
-      <Navbar score={this.state.score} />
+      <Navbar score={this.state.score} topscore={this.state.topscore}/>
       <Section>
           {this.state.Avengers.map(Avenger => (
             <AvengerCard

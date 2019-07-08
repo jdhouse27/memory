@@ -5,9 +5,14 @@
     display: inline-block;
 }
 
+li {
+    list-style-type: none;
+    display: block;
+    text-align: center;
+}
+
 .title {
     width: 90%;
-    text-align: center;
     font-size: 3.5rem;
     color: rgb(50, 51, 53);
     text-shadow: 0 3px 6px antiquewhite;
@@ -15,14 +20,8 @@
     font-weight: bolder;
 }
 
-li {
-    list-style-type: none;
-    display: block;
-}
-
 .score {
     color: antiquewhite;
     text-shadow: 0 3px 6px black;
     font-size: 2em;
-    text-align: end;
 }
