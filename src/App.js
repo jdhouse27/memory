@@ -5,46 +5,23 @@ import Section from "./components/Section";
 import AvengerCard from "./components/AvengerCard";
 import Avengers from "./avengers.json";
 
-
 class App extends Component {
   // Setting this.state.avengers to the avengers json array
   state = {
     Avengers,
     score: 0,
-    topscore: 0,
-    clickedAvengers: []
+    topScore: 0,
+    clickedAvenger: []
   };
 
   handleClick = (id) => {
-    //first we must capture the Avengers id then we can add to the clickAvenger array to compare clicks later
-    const clickedAvengers = this.state.clickedAvengers;
-   
-    //here we determine what to do if the Avenger has already been clicked
-    if (clickedAvengers.indexOf(id)) {
-      //radomly sort Avengers
-      this.setState({
-        Avengers: this.state.Avengers.sort(function(a, b) {
-          return 0.5 - Math.random();
-        }),
-        score: this.state.score + 1
-      },
-      //what to do when user has clicked all Avengers correctly
-        () => {
-          if (this.state.score === 12) {
-          console.log("Winner");
-          //radomly sort Avengers
-          this.setState({
-            Avengers: this.state.Avengers.sort(function(a, b) {
-              return 0.5 - Math.random();
-            }),
-            clickedAvenger: [],
-            score: 0
-            });
-          }
-        }
-      );
-    } else {
-      //radomly sort Avengers
+    //first we must capture the Avengers id then then check if in the clickedAvenger array 
+    const testId = id;
+    const currentAvenger = this.state.clickedAvenger.indexOf(id) > -1;
+    console.log(testId);
+    //what to do if the Avenger has already been clicked
+    if (currentAvenger) {
+      //radomly sort Avengers also update score and clickedAvenger array
       this.setState({
         Avengers: this.state.Avengers.sort(function(a, b) {
           return 0.5 - Math.random();
@@ -52,8 +29,46 @@ class App extends Component {
         clickedAvenger: [],
         score: 0
       });
+
       //add You lose effect
-      console.log("you loser!");
+      alert("You already selected that character.  Try again.");
+     
+      //update topscore if new top score   
+      if(this.state.score > this.state.topScore){
+        this.setState({
+          topScore: this.state.score
+        });
+      }
+
+    } else {
+      //radomly sort Avengers
+      this.setState({
+        Avengers: this.state.Avengers.sort(function(a, b) {
+          return 0.5 - Math.random();
+        }),
+        score: this.state.score + 1
+      });
+      //what to do if users successfully clicks all 12
+      if (this.state.score === 12) {
+        //radomly sort Avengers also update score and clickedAvenger array
+        this.setState({
+          Avengers: this.state.Avengers.sort(function(a, b) {
+            return 0.5 - Math.random();
+          }),
+          clickedAvenger: [],
+          score: 0
+        });
+
+        //add winner effect
+        alert("Wow, you have a great memory!  Want to play again.")
+        
+        //update topscore if new top score   
+        if(this.state.score > this.state.topScore){
+          this.setState({
+            topScore: this.state.score
+          });
+        }
+      }
     }
   };
 
@@ -61,7 +76,7 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
-      <Navbar score={this.state.score} topscore={this.state.topscore}/>
+      <Navbar score={this.state.score} topScore={this.state.topScore}/>
       <Section>
           {this.state.Avengers.map(Avenger => (
             <AvengerCard

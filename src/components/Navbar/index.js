@@ -6,7 +6,7 @@ function Navbar(props) {
     <nav className="navbar navbar-default navbar-fixed-top">
       <ul>
         <li className="title">Avengers Memory Game</li>
-        <li className="score">Score: {props.score} | Top Score: {props.topscore}</li>
+        <li className="score">Score: {props.score} | Top Score: {props.topScore}</li>
       </ul>
     </nav>
   );
