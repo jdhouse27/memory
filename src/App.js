@@ -11,57 +11,39 @@ class App extends Component {
     Avengers,
     score: 0,
     topScore: 0,
-    clickedAvenger: []
+    clickedAvengers: []
   };
 
   handleClick = (id) => {
     //first we must capture the Avengers id then then check if in the clickedAvenger array 
-    const testId = id;
-    const currentAvenger = this.state.clickedAvenger.indexOf(id) > -1;
-    console.log(testId);
+    const clickedCard = id;
+    const currentAvenger = this.state.clickedAvengers.indexOf(clickedCard) > -1;
+    console.log(clickedCard);
     //what to do if the Avenger has already been clicked
-    if (currentAvenger) {
-      //radomly sort Avengers also update score and clickedAvenger array
+    if (!currentAvenger) {
+      //radomly sort Avengers, update score, and concat to clickedAvengers array
       this.setState({
         Avengers: this.state.Avengers.sort(function(a, b) {
           return 0.5 - Math.random();
         }),
-        clickedAvenger: [],
-        score: 0
+        score: this.state.score + 1,
+        clickedAvengers: this.state.clickedAvengers.concat(clickedCard)
       });
 
-      //add You lose effect
-      alert("You already selected that character.  Try again.");
-     
-      //update topscore if new top score   
-      if(this.state.score > this.state.topScore){
-        this.setState({
-          topScore: this.state.score
-        });
-      }
-
-    } else {
-      //radomly sort Avengers
-      this.setState({
-        Avengers: this.state.Avengers.sort(function(a, b) {
-          return 0.5 - Math.random();
-        }),
-        score: this.state.score + 1
-      });
       //what to do if users successfully clicks all 12
       if (this.state.score === 12) {
-        //radomly sort Avengers also update score and clickedAvenger array
+        //radomly sort Avengers, reset score, and empty clickedAvenger array
         this.setState({
           Avengers: this.state.Avengers.sort(function(a, b) {
             return 0.5 - Math.random();
           }),
-          clickedAvenger: [],
+          clickedAvengers: [],
           score: 0
         });
 
         //add winner effect
         alert("Wow, you have a great memory!  Want to play again.")
-        
+
         //update topscore if new top score   
         if(this.state.score > this.state.topScore){
           this.setState({
@@ -69,6 +51,25 @@ class App extends Component {
           });
         }
       }
+    } else {
+      //radomly sort Avengers also update score and clickedAvenger array
+      this.setState({
+        Avengers: this.state.Avengers.sort(function(a, b) {
+          return 0.5 - Math.random();
+        }),
+        clickedAvengers: [],
+        score: 0
+      });
+      
+      //add You lose effect
+      alert("You already selected that character.  Try again.");
+           
+        //update topscore if new top score   
+        if(this.state.score > this.state.topScore){
+          this.setState({
+            topScore: this.state.score
+          });
+        }
     }
   };
 
@@ -84,6 +85,7 @@ class App extends Component {
               key={Avenger.id}
               image={Avenger.image}
               handleClick={this.handleClick}
+              clicked={Avenger.clicked}
             />
           ))}
       </Section>
