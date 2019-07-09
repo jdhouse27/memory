@@ -20,7 +20,26 @@ class App extends Component {
     const currentAvenger = this.state.clickedAvengers.indexOf(clickedCard) > -1;
     console.log(clickedCard);
     //what to do if the Avenger has already been clicked
-    if (!currentAvenger) {
+    if (currentAvenger) {
+      //radomly sort Avengers also update score and clickedAvenger array
+      this.setState({
+        Avengers: this.state.Avengers.sort(function(a, b) {
+          return 0.5 - Math.random();
+        }),
+        clickedAvengers: [],
+        score: 0
+      });
+      
+      //add You lose effect
+      alert("You already selected that character.  Try again.");
+           
+        //update topscore if new top score   
+        if(this.state.score > this.state.topScore){
+          this.setState({
+            topScore: this.state.score
+          });
+        }
+    } else {
       //radomly sort Avengers, update score, and concat to clickedAvengers array
       this.setState({
         Avengers: this.state.Avengers.sort(function(a, b) {
@@ -31,7 +50,7 @@ class App extends Component {
       });
 
       //what to do if users successfully clicks all 12
-      if (this.state.score === 12) {
+      if (this.state.score === 11) {
         //radomly sort Avengers, reset score, and empty clickedAvenger array
         this.setState({
           Avengers: this.state.Avengers.sort(function(a, b) {
@@ -51,25 +70,6 @@ class App extends Component {
           });
         }
       }
-    } else {
-      //radomly sort Avengers also update score and clickedAvenger array
-      this.setState({
-        Avengers: this.state.Avengers.sort(function(a, b) {
-          return 0.5 - Math.random();
-        }),
-        clickedAvengers: [],
-        score: 0
-      });
-      
-      //add You lose effect
-      alert("You already selected that character.  Try again.");
-           
-        //update topscore if new top score   
-        if(this.state.score > this.state.topScore){
-          this.setState({
-            topScore: this.state.score
-          });
-        }
     }
   };
 
