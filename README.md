@@ -2,7 +2,7 @@
 * A interactive game app to test your memory skills
 
 ## Website
-https://jdhouse27.github.io/memory/.
+https://avengersmemory.herokuapp.com/
 
 ## Purpose:
 To design the classic memory game with REACT.
