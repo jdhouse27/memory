@@ -1,5 +1,5 @@
 # Memory
-* A interactive game app to test your memory skills
+An interactive game app to test your memory skills
 
 ## Website
 https://avengersmemory.herokuapp.com/
