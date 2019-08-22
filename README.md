@@ -2,7 +2,7 @@
 * A interactive game app to test your memory skills
 
 ##
-* Try it [Link] [https://jdhouse27.github.io/memory/.]
+* Try it https://jdhouse27.github.io/memory/.
 
 ## Purpose:
 To design the classic memory game with REACT.
